@@ -1,6 +1,7 @@
 
 
-To begin with, we want to clean up the data. To do this, we will delete all incidents that have zero delay(as this will not impact this particular analysis). Moreover, we will delete all vehicle route numbers that do not have a corresponding vehicle route number.
+To begin with, we want to clean up the data. To do this, we will delete all incidents that have zero delay(as this will not impact this particular analysis).
+Moreover, we will delete all vehicle route numbers that do not have a corresponding vehicle route number.
  
 DELETE
 FROM `toronto bus delay`
@@ -8,7 +9,8 @@ WHERE `Min Delay` = 0
  
  
  
-Note: We will come back to the original data at the end to see how much of an impact removing all these values, and several others, will have on the analysis – indicating how much cleaner the original data can be.
+Note: We will come back to the original data at the end to see how much of an impact removing all these values, and several others, 
+will have on the analysis – indicating how much cleaner the original data can be.
  
 Next, we want to view how many vehicles, vehicle routes(bus stops), and incident types are operational with the TTC.
  
