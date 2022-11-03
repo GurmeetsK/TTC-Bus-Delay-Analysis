@@ -33,3 +33,56 @@ ORDER BY totaldelay desc
 We notice that the topmost delay is Diversion. Though there are only around 4.5% of incidents related to diversion, 28% of the minutes delayed are through diversion.
 We can confirm that the top 3 most troublesome incidents are Diversion, Operations and Mechanical. Hence, the two queries each below to dive deeper into these 3 incidents.
  
+Mechanical:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Mechanical'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Mechanical'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
+ 
+Operations:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Operations - Operator'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Operations - Operator'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
+ 
+Diversion:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Diversion'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Diversion'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
