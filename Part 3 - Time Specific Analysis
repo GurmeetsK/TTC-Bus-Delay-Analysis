@@ -1,0 +1,35 @@
+We will start with the specifics of which incidents occurred within different time lengths
+ 
+SELECT Incident, COUNT(INCIDENT), month(date)
+FROM `toronto bus delay`
+GROUP BY Incident, month(date)
+ORDER BY month(date) asc
+ 
+Immediately, we can see that the most incidents all around are Operations or Mechnical related.
+ 
+If we do a similar query for days of the week, we can see a similar result:
+ 
+SELECT Incident, Day, COUNT(Incident)
+FROM `toronto bus delay`
+GROUP BY Incident, Day
+ 
+After noticing that Operations and Mechanical are the highest incidents in these queries, we can confirm the same by using OVER in our basic query to see percentages
+ 
+SELECT `Incident`,
+COUNT(*),
+COUNT(*) * 100 / sum(count(*)) over() as 'percenttotal'
+FROM `toronto bus delay`
+GROUP BY Incident
+ORDER BY 'percenttotal' desc
+ 
+The bigger issue, of course, would be how much of a delay these incidents cause, so we can do another query to understand which incidents cause most delays:
+ 
+SELECT `Incident`,
+sum(`Min Delay`) totaldelay
+FROM `toronto bus delay`
+GROUP BY Incident
+ORDER BY totaldelay desc
+ 
+We notice that the topmost delay is Diversion. Though there are only around 4.5% of incidents related to diversion, 28% of the minutes delayed are through diversion.
+We can confirm that the top 3 most troublesome incidents are Diversion, Operations and Mechanical. Hence, the two queries each below to dive deeper into these 3 incidents.
+ 
