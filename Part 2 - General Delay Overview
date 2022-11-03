@@ -1,11 +1,13 @@
-To begin with the earnest analytical work, we will start with the total incident counts. We will use WITH ROLLUP in our query so we can also identify the total number of incidents to compare.
+To begin with the earnest analytical work, we will start with the total incident counts.
+We will use WITH ROLLUP in our query so we can also identify the total number of incidents to compare.
  
 SELECT COUNT(Incident), Incident
 FROM `toronto bus delay`
 GROUP BY Incident WITH ROLLUP
 ORDER BY COUNT(Incident) desc
  
-To dive even further, we can query the incident counts per month and day as below. This will also include a WITH ROLLUP. We will be able to see total incident counts per month and per day.
+To dive even further, we can query the incident counts per month and day as below. 
+This will also include a WITH ROLLUP. We will be able to see total incident counts per month and per day.
  
 SELECT COUNT(INCIDENT), month(date), day(date)
 FROM `toronto bus delay`
