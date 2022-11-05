@@ -35,6 +35,50 @@ ORDER BY totaldelay desc
 We notice that the topmost delay is Diversion. 
 Though there are only around 4.5% of incidents related to diversion, 28% of the minutes delayed are through diversion.
 We can confirm that the top 3 most troublesome incidents are Diversion, Operations and Mechanical. 
+
+We also want to see through other means if Operations, Diversion and Mechanical are indeed the most pressing incidents.
+
+We will start with Route Types -
+
+SELECT Incident, COUNT(Incident),
+CASE 
+	WHEN ROUTE BETWEEN 7 AND 189 THEN 'Regular'
+    WHEN ROUTE BETWEEN 900 AND 999 THEN 'Express'
+    WHEN ROUTE BETWEEN 300 AND 399 THEN 'Night'
+    WHEN ROUTE BETWEEN 400 AND 499 THEN 'HubConnectors'
+    ELSE 'Undefined'
+    END AS 'Bus Type'
+FROM `toronto bus delay`
+GROUP BY `Bus Type`, Incident WITH ROLLUP
+ORDER BY COUNT(Incident) desc
+
+Immediately we can see that approximately 25% of all Incidents are on regular route types with operation as Incident. Mechanical comes next. Diversion,
+while low(comparitively), is still in the top 10 most Incidents by route type. We also see Security and Collision as quite high numbers.
+
+For our next query we will tweak the above one slightly. This is to check for Delay while also confirming if Diversion is indeed the highest and to 
+see if Security and Collision are causes for concern in terms of traffic causing incidents.
+
+SELECT Incident, COUNT(Incident), sum(`Min Delay`),
+CASE 
+	WHEN ROUTE BETWEEN 7 AND 189 THEN 'Regular'
+    WHEN ROUTE BETWEEN 900 AND 999 THEN 'Express'
+    WHEN ROUTE BETWEEN 300 AND 399 THEN 'Night'
+    WHEN ROUTE BETWEEN 400 AND 499 THEN 'HubConnectors'
+    ELSE 'Undefined'
+    END AS 'Bus Type'
+FROM `toronto bus delay`
+GROUP BY `Bus Type`, Incident 
+ORDER BY COUNT(Incident) desc
+
+We notice that Diversion is extremely high in delay(highest of all) and Security and Collision are way less in comparison to the top 3.
+
+----- Next do the same as above forvehicle type 
+And then test to see if vehicle type is a factor in delays(are diesel cars more delay causing than others etc)
+
+
+
+TBC ---
+
 Hence, the two queries each below to dive deeper into these 3 incidents.
  
 Mechanical:
