@@ -1,0 +1,81 @@
+To begin with the earnest analytical work, we will start with the total incident counts.
+We will use WITH ROLLUP in our query so we can also identify the total number of incidents to compare.
+ 
+SELECT COUNT(Incident), Incident
+FROM `toronto bus delay`
+GROUP BY Incident WITH ROLLUP
+ORDER BY COUNT(Incident) desc
+ 
+To dive even further, we can query the incident counts per month and day as below. 
+This will also include a WITH ROLLUP. We will be able to see total incident counts per month and per day.
+ 
+SELECT COUNT(INCIDENT), month(date), day(date)
+FROM `toronto bus delay`
+GROUP BY month(date), day(date) WITH ROLLUP
+ORDER BY COUNT(INCIDENT) desc
+ 
+Then, we will do the same by the day of the week.
+ 
+SELECT Day, COUNT(Incident)
+FROM `toronto bus delay`
+GROUP BY Day
+ 
+Next, we will query for specific time of incidents in general – which will allow us to visualize how the incidents happen throughout the day.
+ 
+SELECT COUNT(*), time
+FROM `toronto bus delay`
+GROUP BY Time
+ORDER BY Time asc
+ 
+Next, we will query based on location.
+
+SELECT DISTINCT Location, COUNT(Incident)
+FROM `toronto bus delay`
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+
+
+Finally, we will query Incident Type based on Route and Vehicle type:
+
+SELECT Incident, COUNT(Incident),
+CASE 
+	WHEN ROUTE BETWEEN 7 AND 189 THEN 'Regular'
+    WHEN ROUTE BETWEEN 900 AND 999 THEN 'Express'
+    WHEN ROUTE BETWEEN 300 AND 399 THEN 'Night'
+    WHEN ROUTE BETWEEN 400 AND 499 THEN 'HubConnectors'
+    ELSE 'Undefined'
+    END AS 'Bus Type'
+FROM `toronto bus delay`
+GROUP BY `Bus Type`, Incident WITH ROLLUP
+ORDER BY COUNT(Incident) desc
+
+SELECT Incident, COUNT(Incident),
+CASE 
+	WHEN Vehicle BETWEEN 1000 AND 1149 THEN 'DIESEL-ELECTRIC'  
+	WHEN Vehicle BETWEEN 1200 AND 1423 THEN 'DIESEL-ELECTRIC'
+	WHEN Vehicle BETWEEN 1500 AND 1689 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3100 AND 3369 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 3400 AND 3454 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3455 AND 3654 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3700 AND 3724 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3725 AND 3749 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3750 AND 3759 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 7900 AND 7979 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8000 and 8099 then 'DIESEL'
+    WHEN Vehicle BETWEEN 8100 AND 8219 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8300 AND 8396 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8400 AND 8617 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8620 AND 8964 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9000 AND 9152 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9200 AND 9239 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W100' AND 'W300' THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W500' AND 'W579' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W580' AND 'W627' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W628' AND 'W647' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W700' AND 'W790' THEN 'GASOLINE'
+    ELSE 'UNDEFINED'
+    END AS 'Vehicle Type'
+FROM `toronto bus delay`
+GROUP BY `Vehicle Type`, Incident WITH ROLLUP
+ORDER BY COUNT(Incident) desc
+FROM `toronto bus delay`
