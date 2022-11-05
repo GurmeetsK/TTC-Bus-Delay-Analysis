@@ -35,9 +35,9 @@ GROUP BY Location
 ORDER BY COUNT(Incident) desc
 
 
-Finally, we will query Incident Type based on Route and Vehicle type:
+Finally, we will query Incident Count based on Route and Vehicle type:
 
-SELECT Incident, COUNT(Incident),
+SELECT COUNT(Incident),
 CASE 
 	WHEN ROUTE BETWEEN 7 AND 189 THEN 'Regular'
     WHEN ROUTE BETWEEN 900 AND 999 THEN 'Express'
@@ -46,10 +46,10 @@ CASE
     ELSE 'Undefined'
     END AS 'Bus Type'
 FROM `toronto bus delay`
-GROUP BY `Bus Type`, Incident WITH ROLLUP
+GROUP BY `Bus Type`
 ORDER BY COUNT(Incident) desc
 
-SELECT Incident, COUNT(Incident),
+SELECT COUNT(Incident),
 CASE 
 	WHEN Vehicle BETWEEN 1000 AND 1149 THEN 'DIESEL-ELECTRIC'  
 	WHEN Vehicle BETWEEN 1200 AND 1423 THEN 'DIESEL-ELECTRIC'
@@ -76,6 +76,5 @@ CASE
     ELSE 'UNDEFINED'
     END AS 'Vehicle Type'
 FROM `toronto bus delay`
-GROUP BY `Vehicle Type`, Incident WITH ROLLUP
+GROUP BY `Vehicle Type`
 ORDER BY COUNT(Incident) desc
-FROM `toronto bus delay`
