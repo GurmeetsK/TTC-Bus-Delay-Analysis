@@ -72,7 +72,37 @@ ORDER BY COUNT(Incident) desc
 
 We notice that Diversion is extremely high in delay(highest of all) and Security and Collision are way less in comparison to the top 3.
 
------ Next do the same as above forvehicle type 
+SELECT Incident, COUNT(Incident), sum(`Min Delay`),
+CASE 
+	WHEN Vehicle BETWEEN 1000 AND 1149 THEN 'DIESEL-ELECTRIC'  
+	WHEN Vehicle BETWEEN 1200 AND 1423 THEN 'DIESEL-ELECTRIC'
+	WHEN Vehicle BETWEEN 1500 AND 1689 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3100 AND 3369 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 3400 AND 3454 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3455 AND 3654 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3700 AND 3724 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3725 AND 3749 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3750 AND 3759 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 7900 AND 7979 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8000 and 8099 then 'DIESEL'
+    WHEN Vehicle BETWEEN 8100 AND 8219 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8300 AND 8396 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8400 AND 8617 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8620 AND 8964 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9000 AND 9152 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9200 AND 9239 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W100' AND 'W300' THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W500' AND 'W579' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W580' AND 'W627' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W628' AND 'W647' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W700' AND 'W790' THEN 'GASOLINE'
+    ELSE 'UNDEFINED'
+    END AS 'Vehicle Type'
+FROM `toronto bus delay`
+GROUP BY `Vehicle Type`, Incident
+ORDER BY COUNT(Incident) desc
+
+
 And then test to see if vehicle type is a factor in delays(are diesel cars more delay causing than others etc)
 
 
