@@ -72,6 +72,9 @@ ORDER BY COUNT(Incident) desc
 
 We notice that Diversion is extremely high in delay(highest of all) and Security and Collision are way less in comparison to the top 3.
 
+The below query will do the same for Vehicle Types. We will also find similar results wherein Mechanical, Operations and Diversion are the highest in
+Count and in Delay.
+
 SELECT Incident, COUNT(Incident), sum(`Min Delay`),
 CASE 
 	WHEN Vehicle BETWEEN 1000 AND 1149 THEN 'DIESEL-ELECTRIC'  
@@ -102,8 +105,9 @@ FROM `toronto bus delay`
 GROUP BY `Vehicle Type`, Incident
 ORDER BY COUNT(Incident) desc
 
+Moreover, with vehicle types, we also would like to see if the type actually matters when it comes to any sort of delay. So the below queries will 
+compare the top 3 Incident types with the vehicle types.
 
-And then test to see if vehicle type is a factor in delays(are diesel cars more delay causing than others etc)
 
 
 
