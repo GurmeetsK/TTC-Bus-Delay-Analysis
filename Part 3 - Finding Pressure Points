@@ -105,16 +105,49 @@ FROM `toronto bus delay`
 GROUP BY `Vehicle Type`, Incident
 ORDER BY COUNT(Incident) desc
 
-Moreover, with vehicle types, we also would like to see if the type actually matters when it comes to any sort of delay. So the below queries will 
+Moreover, with vehicle types, we also would like to see if the type actually matters when it comes to any sort of delay. So we will 
 compare the top 3 Incident types with the vehicle types.
 
+The below query is the standard that will be used. To account ONLY for Mechanical, Operations and Diversion, we will add a WHERE clause after FROM.
+
+SELECT COUNT(Incident), COUNT(*) * 100 / sum(count(*)) over() as 'percenttotal',
+CASE 
+	WHEN Vehicle BETWEEN 1000 AND 1149 THEN 'DIESEL-ELECTRIC'  
+	WHEN Vehicle BETWEEN 1200 AND 1423 THEN 'DIESEL-ELECTRIC'
+	WHEN Vehicle BETWEEN 1500 AND 1689 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3100 AND 3369 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 3400 AND 3454 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3455 AND 3654 THEN 'DIESEL-ELECTRIC'
+    WHEN Vehicle BETWEEN 3700 AND 3724 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3725 AND 3749 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 3750 AND 3759 THEN 'BATTERY-ELECTRIC'
+    WHEN Vehicle BETWEEN 7900 AND 7979 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8000 and 8099 then 'DIESEL'
+    WHEN Vehicle BETWEEN 8100 AND 8219 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8300 AND 8396 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8400 AND 8617 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 8620 AND 8964 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9000 AND 9152 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 9200 AND 9239 THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W100' AND 'W300' THEN 'DIESEL'
+    WHEN Vehicle BETWEEN 'W500' AND 'W579' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W580' AND 'W627' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W628' AND 'W647' THEN 'GASOLINE'
+    WHEN Vehicle BETWEEN 'W700' AND 'W790' THEN 'GASOLINE'
+    ELSE 'UNDEFINED'
+    END AS 'Vehicle Type'
+FROM `toronto bus delay`
+GROUP BY `Vehicle Type`, 'percenttotal' 
+ORDER BY COUNT(Incident) desc
+
+We can confirm that though there are certain percentage differences from the original standard of the query, the type of vehicle does not impact the count
+or minutes of delay.
+
+After having explored the dataset's analytical numbers, we can see that the biggest causes of concern are Mechanical, Operations and Diversion.
+In the next part, we will dive deeper into these three incidents and see if they can uncover anything new that our previous analysis has not unearthed 
+so far.
 
 
-
-TBC ---
-
-Hence, the two queries each below to dive deeper into these 3 incidents.
- 
 Mechanical:
  
 SELECT Location,
