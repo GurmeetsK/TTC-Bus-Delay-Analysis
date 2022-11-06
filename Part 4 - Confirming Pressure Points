@@ -1,3 +1,63 @@
+Mechanical:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Mechanical'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Mechanical'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
+ 
+Operations:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Operations - Operator'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Operations - Operator'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
+ 
+Diversion:
+ 
+SELECT Location,
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Diversion'
+GROUP BY Location
+ORDER BY COUNT(Incident) desc
+ 
+SELECT month(date),
+COUNT(Incident),
+avg(`Min Delay`)
+FROM `toronto bus delay`
+WHERE Incident = 'Diversion'
+GROUP BY month(date)
+ORDER BY COUNT(Incident) desc
+
+
+
+
+
+
+
 We are going to start with Mechanical first.
  
 What we notice first and foremost is that, in the time query, January and June are the highest in count – but the average delay is very similar. 
