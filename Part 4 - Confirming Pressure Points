@@ -1,3 +1,6 @@
+
+We will start exploring Mechanical first.
+
 Mechanical:
  
 SELECT Location,
@@ -15,9 +18,32 @@ FROM `toronto bus delay`
 WHERE Incident = 'Mechanical'
 GROUP BY month(date)
 ORDER BY COUNT(Incident) desc
+
  
-Operations:
+What we notice first and foremost is that, in the time query, January and June are the highest in count – but the average delay is very similar. 
+In the other query, we see Kipling Station and Pioneer Village Station with the highest by quite some margin(above 200 out of more than 2000 locations,
+10 of which are above 100).
+
+SELECT month(date), avg(`Min Delay`), count(incident)
+FROM `toronto bus delay`
+WHERE Location = 'PIONEER VILLAGE STATIO'
+AND Incident = 'Mechanical'
+GROUP BY month(date)
+ORDER BY count(incident) desc
  
+SELECT month(date), avg(`Min Delay`), count(incident)
+FROM `toronto bus delay`
+WHERE Location = 'KIPLING STATION'
+AND Incident = 'Mechanical'
+GROUP BY month(date)
+ORDER BY count(incident) desc
+
+With the above two queries, this pretty much confirms the notion that in terms of Mechanical at least,
+January and June were months of note at least for Mechanical.
+
+Next, looking at Operations, we see that Kipling station and Pioneer Village Station are in the top 3 locations, 
+with the average delay per month for the Incident on average is one minute higher.
+  
 SELECT Location,
 COUNT(Incident),
 avg(`Min Delay`)
@@ -33,6 +59,10 @@ FROM `toronto bus delay`
 WHERE Incident = 'Operations - Operator'
 GROUP BY month(date)
 ORDER BY COUNT(Incident) desc
+
+ 
+Next, looking at Operations, we see that Kipling station and Pioneer Village Station are in the top 3 locations, 
+with the average delay per month for the Incident on average is one minute higher.
  
 Diversion:
  
@@ -51,38 +81,6 @@ FROM `toronto bus delay`
 WHERE Incident = 'Diversion'
 GROUP BY month(date)
 ORDER BY COUNT(Incident) desc
-
-
-
-
-
-
-
-We are going to start with Mechanical first.
- 
-What we notice first and foremost is that, in the time query, January and June are the highest in count – but the average delay is very similar. 
-In the other query, we see Kipling Station and Pioneer Village Station with the highest by quite some margin(above 200 out of more than 2000 locations,
-10 of which are above 100).
- 
-SELECT month(date), avg(`Min Delay`), count(incident)
-FROM `toronto bus delay`
-WHERE Location = 'PIONEER VILLAGE STATIO'
-AND Incident = 'Mechanical'
-GROUP BY month(date)
-ORDER BY count(incident) desc
- 
-SELECT month(date), avg(`Min Delay`), count(incident)
-FROM `toronto bus delay`
-WHERE Location = 'KIPLING STATION'
-AND Incident = 'Mechanical'
-GROUP BY month(date)
-ORDER BY count(incident) desc
- 
-With the above two queries, this pretty much confirms the notion that in terms of Mechanical at least,
-January and June were months of note at least for Mechanical.
- 
-Next, looking at Operations, we see that Kipling station and Pioneer Village Station are in the top 3 locations, 
-with the average delay per month for the Incident on average is one minute higher.
  
 In terms of Diversion, we don’t see Kipling Station specifically have any diversions at all 
 But we do notice that in January Diversion count was much higher than the rest, with February and June following close by.
