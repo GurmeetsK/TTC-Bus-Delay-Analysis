@@ -101,7 +101,6 @@ Kipling Station,
 Pioneer Village Station
 Bathurst and Roselawn(Diversion)
 Bay and front(Diversion)
-
 Chaplin and Eglinton(Diversion)
  
 Month:
@@ -111,4 +110,6 @@ June
 There are of course, natural pressure points throughout the day and week (such as hours before and after work) and Weekdays.
  
 Using Tableau(images attached to the Repo) we can see how these specific pressure points interact with the natural pressure points in traffic
-Do they add to the daily motion of traffic or are they merely a small piece of the congestion puzzle that needs to be solved? 
+
+With the visualizations we will find out if
+These pressure pointsadd to the daily motion of traffic or are they merely a small piece of the congestion puzzle that needs to be solved? 
