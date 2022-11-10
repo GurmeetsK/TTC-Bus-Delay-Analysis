@@ -1,5 +1,3 @@
-
-
 To begin with, we want to clean up the data. To do this, we will delete all incidents that have zero delay(as this will not impact this particular analysis).
 Moreover, we will delete all vehicle route numbers that do not have a corresponding vehicle route number.
  
@@ -7,10 +5,7 @@ DELETE
 FROM `toronto bus delay`
 WHERE `Min Delay` = 0
  
-Note: We will come back to the original data at the end to see how much of an impact removing all these values, and several others, 
-will have on the analysis – indicating how much cleaner the original data can be.
- 
-Next, we want to view how many vehicles, vehicle routes(bus stops), and incident types are operational with the TTC.
+Next, we want to view how many vehicles, vehicle routes, and incident types are operational with the TTC.
  
 After a small search, we can see that
  
@@ -28,7 +23,7 @@ FROM `toronto bus delay`;
  
 We notice a hefty number of vehicles and locations impacted.
  
-Next, we want to categorize route types and vehicle types as given by the TTC. For that, we can do a couple of Case Statements as queried below:
+Lastly, we want to categorize route types and vehicle types as given by the TTC. For that, we can do a couple of Case Statements as queried below:
  
 SELECT COUNT(DISTINCT Route) AS RouteTypes,
 CASE
@@ -69,4 +64,5 @@ CASE
 FROM `toronto bus delay`
 GROUP BY `Vehicle Type Count`
 
- 
+Once all these queries are performed, we will be able to begin with analytical work to answer our questions about Bus Delays in Toronto.
+
