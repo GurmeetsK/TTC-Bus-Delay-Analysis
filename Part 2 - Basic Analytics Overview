@@ -7,20 +7,21 @@ GROUP BY Incident WITH ROLLUP
 ORDER BY COUNT(Incident) desc
  
 To dive even further, we can query the incident counts per month and day as below. 
-This will also include a WITH ROLLUP. We will be able to see total incident counts per month and per day.
+This will also include a WITH ROLLUP. We will be able to see total incident counts per month and per day instead of having seperate queries for both.
+This will increase efficiency in our queries.
  
 SELECT COUNT(INCIDENT), month(date), day(date)
 FROM `toronto bus delay`
 GROUP BY month(date), day(date) WITH ROLLUP
 ORDER BY COUNT(INCIDENT) desc
  
-Then, we will do the same by the day of the week.
+Then, we will do the same by the specific day of the week.
  
 SELECT Day, COUNT(Incident)
 FROM `toronto bus delay`
 GROUP BY Day
  
-Next, we will query for specific time of incidents in general – which will allow us to visualize how the incidents happen throughout the day.
+Next, we will query for specific time of incidents in general – which will allow us to visualize how the incidents happen throughout the day in Tableau.
  
 SELECT COUNT(*), time
 FROM `toronto bus delay`
