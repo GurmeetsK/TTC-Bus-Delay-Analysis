@@ -15,4 +15,6 @@ In this analysis, we will go through the first six months of the Toronto Transit
 
 In brief conclusion, we can see that there are several incidents(Mechanical, Operations and Diversion) and several months(January and June) that are abnormal pressure points in the system. There are also several locations that have an irregular amount of delay incident counts that should be looked at to improve traffic flow citywide.
 
-This dataset was downloaded from [Kaggle] (https://www.kaggle.com/datasets/reihanenamdari/toronto-bus-delay-2022) which, in turn, was taken from the [Open Data source] (https://open.toronto.ca/dataset/ttc-bus-delay-data/) provided by Toronto.Ca
+This dataset was downloaded from [Kaggle](https://www.kaggle.com/datasets/reihanenamdari/toronto-bus-delay-2022) which, in turn, was taken from the [Open Data source](https://open.toronto.ca/dataset/ttc-bus-delay-data/) provided by Toronto.Ca
+
+Corresponding Tableau Visualizations will be attached to the repo.
