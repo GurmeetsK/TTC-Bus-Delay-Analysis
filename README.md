@@ -8,8 +8,8 @@ In this analysis, we will go through the first six months of the Toronto Transit
 
 |**Parts**|**Description**|**Queries Used**|
 | :------------- |:-------------| :-----|
-| Part 1      |Categorizing and Cleaning Variables. I clean up irrelevant data and categorize variables that will be used in future parts. |(Queries used: Delete, Count, Distinct, Group by, Order by, Where, Case/When Statements,)|
-| Part 2     |   I begin analytical work to count incidents and place them in above mentioned variables and in various modes of time.   | (Queries used: Count, Distinct, Group By, Order By, Distinct, Case/When Statements) |
+| Part 1      |Categorizing and Cleaning Variables. I clean up irrelevant data and categorize variables that will be used in future parts. |(Queries used: Delete, Count, Rollup Distinct, Group by, Order by, Where, Case/When Statements,)|
+| Part 2     |   I begin analytical work to count incidents and place them in above mentioned variables and in various modes of time.   | (Queries used: Count, Rollup Distinct, Group By, Order By, Distinct, Case/When Statements) |
 | Part 3 |    I begin finding pressure points in the entire bus system where alarming rates of incidents occur. | (Queries used: Count, Distinct, Group By, Sum, Over, Order By, Case/When Statements)  |
 | Part 4 |    I confirm above found pressure points and see if they reveal other causes of concern in the bus system.     |Queries used: Count, Average, Distinct, Group By, Order By, Where)  |
 
